@@ -1,0 +1,148 @@
+version: "2.1"
+
+services:
+  swag:
+    image: lscr.io/linuxserver/swag
+    container_name: swag
+    cap_add:
+      - NET_ADMIN
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Europe/London
+      - URL=anaellogan.duckdns.org
+      - VALIDATION=duckdns
+      - SUBDOMAINS=wildcard
+      - DUCKDNSTOKEN=8c513e88-a90d-4ddc-9ab2-2fcc09e7ce08
+    volumes:
+      - ./swag:/config
+    ports:
+      - "443:443"
+      - "80:80"
+    restart: unless-stopped
+
+  dashy:
+    image: lissy93/dashy
+    container_name: dashy
+    volumes:
+      - ./dashy_conf.yml:/app/public/conf.yml
+    restart: unless-stopped
+
+  app:
+    build: ./app
+    container_name: app
+    restart: always
+
+  wordpress:
+    image: wordpress:latest
+    container_name: wordpress
+    depends_on:
+      - mysql_db
+    volumes:
+      - ./wordpress:/var/www/html
+    environment:
+      - WORDPRESS_DB_HOST=mysql_db:3306
+      - WORDPRESS_DB_USER=wordpress
+      - WORDPRESS_DB_PASSWORD=wordpress
+    restart: always
+
+  gitea:
+    image: gitea/gitea:latest
+    depends_on:
+      - postgresql_db
+    volumes:
+      - ./gitea:/data
+    environment:
+      - POSTGRES_PASSWORD=password
+    restart: always
+
+  nextcloud:
+    image: nextcloud
+    depends_on:
+      - mysql_db
+    volumes:
+      - ./nextcloud:/var/www/html
+    environment:
+      - MYSQL_HOST=mysql_db:3306
+      - MYSQL_USER=nextcloud
+      - MYSQL_PASSWORD=nextcloud
+      - MYSQL_DATABASE=nextcloud
+    restart: always
+
+  bookstack:
+    image: lscr.io/linuxserver/bookstack
+    container_name: bookstack
+    depends_on:
+      - mysql_db
+    volumes:
+      - ./bookstack:/config
+    environment:
+      - APP_URL=https://bookstack.localhost/
+      - DB_HOST=mysql_db:3306
+      - DB_USER=bookstack
+      - DB_PASS=bookstack
+      - DB_DATABASE=bookstack
+    restart: unless-stopped
+
+  mattermost:
+    image: mattermost/mattermost-preview
+    container_name: mattermost
+    restart: unless-stopped
+
+  mailhog:
+    image: mailhog/mailhog
+    container_name: mailhog
+    restart: unless-stopped
+
+  mysql_db:
+    image: mysql:5.7
+    container_name: mysql_db
+    command: --default-authentication-plugin=mysql_native_password
+    volumes:
+      - ./sql:/docker-entrypoint-initdb.d
+      - mysql_db_data:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password
+    restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    depends_on:
+      - mysql_db
+    environment:
+      - PMA_HOST=mysql_db
+      - MYSQL_ROOT_PASSWORD=password
+    restart: always
+
+  postgresql_db:
+    image: postgres:9.6
+    container_name: postgresql_db
+    volumes:
+      - postgresql_db_data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=gitea
+    restart: always
+
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@admin.com
+      - PGADMIN_DEFAULT_PASSWORD=password
+    restart: always
+
+  redis:
+    image: redis:6.2-alpine
+    container_name: redis
+    volumes: 
+      - redis_data:/data
+    restart: always
+
+volumes:
+  mysql_db_data:
+  postgresql_db_data:
+  redis_data:
+    driver: local

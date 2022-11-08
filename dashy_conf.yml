@@ -1,0 +1,86 @@
+pageInfo:
+  title: Home Lab
+sections:
+  - name: Web
+    icon: far fa-globe
+    items:
+      - title: Wordpress
+        description: ''
+        icon: https://wordpress.localhost/wp-content/uploads/2022/11/wordpress.png
+        url: https://wordpress.localhost/
+        target: newtab
+        id: 0_286_wordpress
+      - title: Gitea
+        icon: favicon
+        url: https://gitea.localhost/
+        target: newtab
+        id: 1_286_gitea
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+  - name: Database
+    items:
+      - title: PhpMyAdmin
+        icon: favicon
+        url: https://phpmyadmin.localhost/
+        target: newtab
+        id: 0_789_phpmyadmin
+      - title: PgAdmin
+        icon: favicon
+        url: https://pgadmin.localhost/
+        target: newtab
+        id: 1_789_pgadmin
+    icon: fa fa-database
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+  - name: Collaborative
+    icon: fa fa-user
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Nextcloud
+        icon: https://nextcloud.localhost/core/img/favicon.ico
+        url: https://nextcloud.localhost/
+        target: newtab
+        id: 0_1351_nextcloud
+      - title: Bookstack
+        icon: https://bookstack.localhost/logo.png
+        url: https://bookstack.localhost/
+        target: newtab
+        id: 1_1351_bookstack
+  - name: Message
+    icon: fa fa-envelope
+    displayData:
+      sortBy: default
+      rows: 1
+      cols: 1
+      collapsed: false
+      hideForGuests: false
+    items:
+      - title: Mailhog
+        icon: https://mailhog.localhost/images/hog.png
+        url: https://mailhog.localhost/
+        target: newtab
+        id: 0_709_mailhog
+      - title: Mattermost
+        icon: >-
+          https://mattermost.localhost/static/images/favicon/favicon-default-96x96.png
+        url: https://mattermost.localhost/
+        target: newtab
+        id: 1_709_mattermost
+appConfig:
+  language: fr
+  layout: auto
+  iconSize: large
+  theme: lissy

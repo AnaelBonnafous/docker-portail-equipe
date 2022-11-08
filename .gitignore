@@ -1,0 +1,11 @@
+*
+!app
+!app/**/*
+!screenshots
+!screenshots/*
+!sql
+!sql/*
+!.gitignore
+!dashy_conf.yml
+!docker-compose.yml
+!README.md
