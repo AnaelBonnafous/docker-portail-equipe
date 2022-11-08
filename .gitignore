@@ -6,7 +6,7 @@
 !sql
 !sql/*
 !swag-conf
-!swag-conf/*
+!swag-conf/*.conf
 !.gitignore
 !dashy_conf.yml
 !docker-compose.yml
