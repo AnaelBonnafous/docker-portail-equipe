@@ -16,6 +16,7 @@ services:
       - DUCKDNSTOKEN=8c513e88-a90d-4ddc-9ab2-2fcc09e7ce08
     volumes:
       - ./swag:/config
+      - ./swag-conf:/config/nginx/proxy-confs
     ports:
       - "443:443"
       - "80:80"

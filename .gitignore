@@ -5,6 +5,8 @@
 !screenshots/*
 !sql
 !sql/*
+!swag-conf
+!swag-conf/*
 !.gitignore
 !dashy_conf.yml
 !docker-compose.yml
