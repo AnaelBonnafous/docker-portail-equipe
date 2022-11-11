@@ -4,17 +4,22 @@ sections:
   - name: Web
     icon: far fa-globe
     items:
+      - title: Application
+        icon: favicon
+        url: https://app.localhost/
+        target: newtab
+        id: 0_286_application
       - title: Wordpress
         description: ''
         icon: https://wordpress.localhost/wp-content/uploads/2022/11/wordpress.png
         url: https://wordpress.localhost/
         target: newtab
-        id: 0_286_wordpress
+        id: 1_286_wordpress
       - title: Gitea
         icon: favicon
         url: https://gitea.localhost/
         target: newtab
-        id: 1_286_gitea
+        id: 2_286_gitea
     displayData:
       sortBy: default
       rows: 1
